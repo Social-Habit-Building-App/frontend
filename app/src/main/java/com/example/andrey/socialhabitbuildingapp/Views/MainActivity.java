@@ -1,4 +1,4 @@
-package com.example.andrey.socialhabitbuildingapp;
+package com.example.andrey.socialhabitbuildingapp.Views;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,9 @@ import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.example.andrey.socialhabitbuildingapp.IMainView;
 import com.example.andrey.socialhabitbuildingapp.Presenters.MainPresenter;
+import com.example.andrey.socialhabitbuildingapp.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
