@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Views.HabitActivity">
+
+    <TextView
+        android:id="@+id/habit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Habit name: Habit 1\n
+Habit description: Description for habit 1\n
+Measure units: minutes\n
+Progress:\n
+date             progress\n
+18.06           7 minutes\n
+23.06           3 minutes\n
+27.06           10 minutes" />
+
+    <Button
+        app:layout_constraintTop_toBottomOf="@id/habit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="add progress" />
+
+</android.support.constraint.ConstraintLayout>

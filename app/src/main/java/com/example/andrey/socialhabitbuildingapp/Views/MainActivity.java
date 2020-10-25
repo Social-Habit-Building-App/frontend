@@ -70,7 +70,7 @@ public class MainActivity extends MvpAppCompatActivity implements IMainView {
 
     @Override
     public void ok() {
-        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ApplicationActivity.class);
         startActivity(intent);
     }
 

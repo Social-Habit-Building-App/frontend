@@ -15,7 +15,7 @@ public class APIHelper {
             protected Void doInBackground(Void... voids) {
 
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     callBack.error();
                     e.printStackTrace();

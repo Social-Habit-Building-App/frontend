@@ -1,6 +1,7 @@
 package com.example.andrey.socialhabitbuildingapp.Views;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,6 +17,8 @@ import java.util.List;
 public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.ViewHolder> {
 
     private List<Habit> data;
+    private OnClickHabitListener onClickHabitListener;
+
 
     public HabitAdapter(List<Habit> data) {
         this.data = data;
@@ -29,8 +32,15 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        Habit habit = data.get(i);
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
+        final Habit habit = data.get(i);
+        viewHolder.view.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                onClickHabitListener.onClickHabit(habit);
+            }
+        });
         viewHolder.habitName.setText(habit.name);
         viewHolder.habitDescription.setText(habit.description);
         viewHolder.habitCount.setText(habit.count1 + "/" + habit.count2);
@@ -39,6 +49,10 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.ViewHolder> 
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    public void setOnClickHabitListener(OnClickHabitListener onClickHabitListener) {
+        this.onClickHabitListener = onClickHabitListener;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -56,6 +70,10 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.ViewHolder> 
             habitCount = view.findViewById(R.id.count);
             habitDescription = view.findViewById(R.id.habit_description);
         }
+    }
+
+    interface OnClickHabitListener {
+        void onClickHabit(Habit habit);
     }
 
 }
