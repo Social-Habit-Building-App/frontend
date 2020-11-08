@@ -1,14 +1,31 @@
 package com.example.andrey.socialhabitbuildingapp.Models;
 
-public class Habit {
-    public String name;
-    public String description;
-    public int count1, count2;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-    public Habit(String name, String description, int count1, int count2) {
-        this.name = name;
-        this.description = description;
-        this.count1 = count1;
-        this.count2 = count2;
+import java.util.List;
+
+public class Habit {
+    @SerializedName("habit_name")
+    @Expose
+    private String habitName;
+    @SerializedName("progresses")
+    @Expose
+    private List<Progress> progresses = null;
+
+    public String getHabitName() {
+        return habitName;
+    }
+
+    public void setHabitName(String habitName) {
+        this.habitName = habitName;
+    }
+
+    public List<Progress> getProgresses() {
+        return progresses;
+    }
+
+    public void setProgresses(List<Progress> progresses) {
+        this.progresses = progresses;
     }
 }

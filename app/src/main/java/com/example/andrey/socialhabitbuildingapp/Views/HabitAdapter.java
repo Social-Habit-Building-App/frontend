@@ -32,18 +32,19 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder,
+                                 @SuppressLint("RecyclerView") final int i) {
         final Habit habit = data.get(i);
         viewHolder.view.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                onClickHabitListener.onClickHabit(habit);
+                onClickHabitListener.onClickHabit(i);
             }
         });
-        viewHolder.habitName.setText(habit.name);
-        viewHolder.habitDescription.setText(habit.description);
-        viewHolder.habitCount.setText(habit.count1 + "/" + habit.count2);
+        viewHolder.habitName.setText(habit.getHabitName());
+//        viewHolder.habitDescription.setText(habit.description);
+//        viewHolder.habitCount.setText(habit.count1 + "/" + habit.count2);
     }
 
     @Override
@@ -59,21 +60,21 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.ViewHolder> 
 
         private View view;
         private TextView habitName;
-        private TextView habitCount;
-        private TextView habitDescription;
+//        private TextView habitCount;
+//        private TextView habitDescription;
 
         @SuppressLint("CutPasteId")
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             view = itemView;
             habitName = view.findViewById(R.id.name_habit);
-            habitCount = view.findViewById(R.id.count);
-            habitDescription = view.findViewById(R.id.habit_description);
+//            habitCount = view.findViewById(R.id.count);
+//            habitDescription = view.findViewById(R.id.habit_description);
         }
     }
 
     interface OnClickHabitListener {
-        void onClickHabit(Habit habit);
+        void onClickHabit(Integer index);
     }
 
 }

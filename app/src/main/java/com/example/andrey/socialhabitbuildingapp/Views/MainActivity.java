@@ -2,25 +2,20 @@ package com.example.andrey.socialhabitbuildingapp.Views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.arellomobile.mvp.MvpAppCompatActivity;
-import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.example.andrey.socialhabitbuildingapp.IMainView;
-import com.example.andrey.socialhabitbuildingapp.Presenters.MainPresenter;
+import com.example.andrey.socialhabitbuildingapp.Models.APIHelper;
 import com.example.andrey.socialhabitbuildingapp.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends MvpAppCompatActivity implements IMainView {
-
-    @InjectPresenter
-    public MainPresenter presenter;
+public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.login)
     public EditText login;
@@ -44,7 +39,18 @@ public class MainActivity extends MvpAppCompatActivity implements IMainView {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.login("1", "1");
+                setProgress(true);
+                APIHelper.login(login.getText().toString(), password.getText().toString(), new APIHelper.LoginListener() {
+                    @Override
+                    public void success() {
+                        ok();
+                    }
+
+                    @Override
+                    public void failure() {
+                        error();
+                    }
+                });
             }
         });
     }
@@ -63,18 +69,16 @@ public class MainActivity extends MvpAppCompatActivity implements IMainView {
         }
     }
 
-    @Override
     public void load() {
         setProgress(true);
     }
 
-    @Override
     public void ok() {
+        setProgress(false);
         Intent intent = new Intent(getApplicationContext(), ApplicationActivity.class);
         startActivity(intent);
     }
 
-    @Override
     public void error() {
         setProgress(false);
         Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
