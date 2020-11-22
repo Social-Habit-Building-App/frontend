@@ -1,7 +1,5 @@
 package com.example.andrey.socialhabitbuildingapp.Models;
 
-import android.support.annotation.NonNull;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -16,6 +14,12 @@ public class User {
     @SerializedName("username")
     @Expose
     private String username;
+
+    public User(String email, Integer id, String username) {
+        this.email = email;
+        this.id = id;
+        this.username = username;
+    }
 
     public String getEmail() {
         return email;

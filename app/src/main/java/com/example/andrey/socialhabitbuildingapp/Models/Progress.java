@@ -11,6 +11,11 @@ public class Progress {
     @Expose
     private String pubDate;
 
+    public Progress(Integer unitsValue, String pubDate) {
+        this.unitsValue = unitsValue;
+        this.pubDate = pubDate;
+    }
+
     public Integer getUnitsValue() {
         return unitsValue;
     }

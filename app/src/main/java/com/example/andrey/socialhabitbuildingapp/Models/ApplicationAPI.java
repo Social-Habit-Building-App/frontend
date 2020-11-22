@@ -11,7 +11,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 public interface ApplicationAPI {
     @GET("/auth/users/me")
@@ -26,22 +25,31 @@ public interface ApplicationAPI {
     @GET("/api/users/{name}")
     Call<HabitsResponce> getHabits(@Path("name") String username);
 
-    @GET("/api/users/{name}/habits/{habitname}")
-    Call<ProgressesResponce> getProgress(@Path("name") String username,
-                                         @Path("habitname") String habitname);
+//    @GET("/api/users/{name}/habits/{habitname}")
+//    Call<ProgressesResponce> getProgress(@Path("name") String username,
+//                                         @Path("habitname") String habitname);
 
-    @POST("/api/users/{name}")
-    Call<Object> createHabit(@Path("name") String username, @Body CreateHabitRequestBody request);
+    @POST("/api/users/habbits/habbit/create")
+    Call<Object> createHabit(@Body CreateHabitRequestBody request);
 
-    @POST("/api/users/{name}/habits/{habitname}")
-    Call<Object> createProgress(@Path("name") String username, @Path("habitname") String habitname,
-                                @Body CreateProgressRequestBody request);
+//    @POST("/api/users/{name}/habits/{habitname}")
+//    Call<Object> createProgress(@Path("name") String username, @Path("habitname") String habitname,
+//                                @Body CreateProgressRequestBody request);
 
     class CreateHabitRequestBody {
+
+        @SerializedName("user")
+        @Expose
+        private Integer user;
 
         @SerializedName("habit_name")
         @Expose
         private String habitName;
+
+        public CreateHabitRequestBody(Integer user, String habitName) {
+            this.user = user;
+            this.habitName = habitName;
+        }
 
         public String getHabitName() {
             return habitName;

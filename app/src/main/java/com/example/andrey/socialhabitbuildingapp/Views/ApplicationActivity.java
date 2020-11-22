@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.example.andrey.socialhabitbuildingapp.R;
 
@@ -14,6 +13,7 @@ public class ApplicationActivity extends AppCompatActivity {
 
     private UserFragment userFragment;
     private GroupsFragment groupsFragment;
+    private HabitsFragment habitsFragment;
 
     BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener;
 
@@ -21,10 +21,16 @@ public class ApplicationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_application);
+
         userFragment = UserFragment.newInstance();
         groupsFragment = GroupsFragment.newInstance();
+        habitsFragment = HabitsFragment.newInstance();
+
         BottomNavigationView navigation = findViewById(R.id.navigation);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frame_application, habitsFragment).commit();
         initBottomNavigation();
+
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
     }
@@ -37,6 +43,8 @@ public class ApplicationActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_tasks:
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.frame_application, habitsFragment).commit();
                         return true;
                     case R.id.navigation_groups:
                         getSupportFragmentManager().beginTransaction()

@@ -1,7 +1,6 @@
 package com.example.andrey.socialhabitbuildingapp.Views;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -43,7 +42,7 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.ViewHolder> 
             }
         });
         viewHolder.habitName.setText(habit.getHabitName());
-//        viewHolder.habitDescription.setText(habit.description);
+        viewHolder.habitDescription.setText(habit.getCategory());
 //        viewHolder.habitCount.setText(habit.count1 + "/" + habit.count2);
     }
 
@@ -61,7 +60,7 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.ViewHolder> 
         private View view;
         private TextView habitName;
 //        private TextView habitCount;
-//        private TextView habitDescription;
+private TextView habitDescription;
 
         @SuppressLint("CutPasteId")
         ViewHolder(@NonNull View itemView) {
@@ -69,7 +68,7 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.ViewHolder> 
             view = itemView;
             habitName = view.findViewById(R.id.name_habit);
 //            habitCount = view.findViewById(R.id.count);
-//            habitDescription = view.findViewById(R.id.habit_description);
+            habitDescription = view.findViewById(R.id.habit_description);
         }
     }
 

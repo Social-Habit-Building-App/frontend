@@ -20,11 +20,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Views.ProfileActivity" />
         <activity
             android:name=".Views.ApplicationActivity"
             android:label="@string/title_activity_application" />
-        <activity android:name=".Views.HabitActivity"></activity>
+        <activity android:name=".Views.HabitActivity" />
+        <activity android:name=".Views.GroupActivity"></activity>
     </application>
 
 </manifest>

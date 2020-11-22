@@ -26,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.login_button)
     public Button btn;
 
+    @BindView(R.id.register_button)
+    public Button register;
+
     @BindView(R.id.progressBar)
     public ProgressBar progress;
 
@@ -60,8 +63,10 @@ public class MainActivity extends AppCompatActivity {
             login.setVisibility(View.GONE);
             password.setVisibility(View.GONE);
             btn.setVisibility(View.GONE);
+            register.setVisibility(View.GONE);
             progress.setVisibility(View.VISIBLE);
         }else{
+            register.setVisibility(View.VISIBLE);
             login.setVisibility(View.VISIBLE);
             password.setVisibility(View.VISIBLE);
             btn.setVisibility(View.VISIBLE);
