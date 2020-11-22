@@ -2,8 +2,8 @@ package com.example.andrey.socialhabitbuildingapp.Models;
 
 import android.os.AsyncTask;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.io.IOException;
+import java.util.List;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -21,34 +21,38 @@ public class APIHelper {
             @Override
             protected Void doInBackground(Void... voids) {
 
+//                try {
+//                    Thread.sleep(1500);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                DataContainer.getInstance().setCurrentUser(new User("ilya-kolomin@somemail.com", 1, "Ilya"));
+//                DataContainer.getInstance().setHabits(
+//                        new ArrayList<>(Arrays.asList(
+//                                new Habit("Habit1", new ArrayList<Progress>()),
+//                                new Habit("Habit2", new ArrayList<Progress>()),
+//                                new Habit("Habit3", new ArrayList<Progress>()),
+//                                new Habit("Habit4", new ArrayList<Progress>()),
+//                                new Habit("Habit5", new ArrayList<Progress>())
+//                        )));
+//
                 try {
-                    Thread.sleep(1500);
-                } catch (InterruptedException e) {
+                    ApplicationAPI.TokenRequestBody request = new ApplicationAPI.TokenRequestBody();
+                    request.setUsername(login);
+                    request.setPassword(password);
+
+                    Token token = applicationAPI.requestJWTToken(request).execute().body();
+                    DataContainer.getInstance().setToken(token);
+
+                    User user = applicationAPI.getUserDataByToken("Bearer " + token.getAccess()).execute().body();
+                    DataContainer.getInstance().setCurrentUser(user);
+//
+                    List<Habit> habits = applicationAPI.getHabits(user.getUsername()).execute().body().getHabits();
+                    DataContainer.getInstance().setHabits(habits);
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-                DataContainer.getInstance().setCurrentUser(new User("ilya-kolomin@somemail.com", 1, "Ilya"));
-                DataContainer.getInstance().setHabits(
-                        new ArrayList<>(Arrays.asList(
-                                new Habit("Habit1", new ArrayList<Progress>()),
-                                new Habit("Habit2", new ArrayList<Progress>()),
-                                new Habit("Habit3", new ArrayList<Progress>()),
-                                new Habit("Habit4", new ArrayList<Progress>()),
-                                new Habit("Habit5", new ArrayList<Progress>())
-                        )));
-
-//                    ApplicationAPI.TokenRequestBody request = new ApplicationAPI.TokenRequestBody();
-//                    request.setUsername(login);
-//                    request.setPassword(password);
-//
-//                    Token token = applicationAPI.requestJWTToken(request).execute().body();
-//                    DataContainer.getInstance().setToken(token);
-//
-//                    User user = applicationAPI.getUserDataByToken("Bearer " + token.getAccess()).execute().body();
-//                    DataContainer.getInstance().setCurrentUser(user);
-
-//                    List<Habit> habits = applicationAPI.getHabits(user.getUsername()).execute().body().getHabits();
-//                    DataContainer.getInstance().setHabits(habits);
                 return null;
             }
 
